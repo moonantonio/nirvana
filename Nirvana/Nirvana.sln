@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NirvanaEditor", "NirvanaEditor\NirvanaEditor.csproj", "{0102A856-43AF-475E-95C2-819786FA7D36}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Motor", "Motor\Motor.vcxproj", "{D7995DC3-ABC1-4872-BFF3-F026608A29FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7995DC3-ABC1-4872-BFF3-F026608A29FA}.Debug|x64.ActiveCfg = Debug|x64
+		{D7995DC3-ABC1-4872-BFF3-F026608A29FA}.Debug|x64.Build.0 = Debug|x64
+		{D7995DC3-ABC1-4872-BFF3-F026608A29FA}.Release|x64.ActiveCfg = Release|x64
+		{D7995DC3-ABC1-4872-BFF3-F026608A29FA}.Release|x64.Build.0 = Release|x64
+		{0102A856-43AF-475E-95C2-819786FA7D36}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0102A856-43AF-475E-95C2-819786FA7D36}.Debug|x64.Build.0 = Debug|Any CPU
+		{0102A856-43AF-475E-95C2-819786FA7D36}.Release|x64.ActiveCfg = Release|Any CPU
+		{0102A856-43AF-475E-95C2-819786FA7D36}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75D32CDA-2D90-4643-B1BC-6373D6B39002}
+	EndGlobalSection
+EndGlobal
