@@ -71,6 +71,14 @@ namespace NirvanaEditor.Hub
         /// <para>Ruta de las plantillas.</para>
         /// </summary>
         private const string RUTA_PLANTILLAS = @"..\..\NirvanaEditor\Plantillas";
+        /// <summary>
+        /// <para>Caracter de separacion de directorio.</para>
+        /// </summary>
+        private const char CARACTER_SEPARACION_DIR = '\\';
+        /// <summary>
+        /// <para>Caracter de separacion de directorio alternativo.</para>
+        /// </summary>
+        private const char CARACTER_SEPARACION_DIR_ALT = '/';
         #endregion
 
         #region Variables Publicas
@@ -82,9 +90,14 @@ namespace NirvanaEditor.Hub
         /// <para>Ruta del nuevo proyecto.</para>
         /// </summary>
         public string _ruta = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\Nirvana\";
-        #endregion
-
-        #region Variables Privadas
+        /// <summary>
+        /// <para>Determina si es valida la ruta.</para>
+        /// </summary>
+        private bool _esValida;
+        /// <summary>
+        /// <para>Mensaje de error.</para>
+        /// </summary>
+        private string _msjError;
         /// <summary>
         /// <para>Lista de plantillas.</para>
         /// </summary>
@@ -103,6 +116,7 @@ namespace NirvanaEditor.Hub
                 if (this._nombre != value)
                 {
                     this._nombre = value;
+                    this.ValidarRutasProyecto();
                     this.EventoPropiedadCambia(nameof(this.Nombre));
                 }
             }
@@ -120,6 +134,38 @@ namespace NirvanaEditor.Hub
                 {
                     this._ruta = value;
                     this.EventoPropiedadCambia(nameof(this.Ruta));
+                }
+            }
+        }
+
+        /// <summary>
+        /// <para>Determina si es valida la ruta.</para>
+        /// </summary>
+        public bool EsValida 
+        {
+            get => this._esValida;
+            set
+            {
+                if (this._esValida != value)
+                {
+                    this._esValida = value;
+                    this.EventoPropiedadCambia(nameof(this.EsValida));
+                }
+            }
+        }
+
+        /// <summary>
+        /// <para>Mensaje de error.</para>
+        /// </summary>
+        public string MsjError
+        {
+            get => this._msjError;
+            set
+            {
+                if (this._msjError != value)
+                {
+                    this._msjError = value;
+                    this.EventoPropiedadCambia(nameof(this.MsjError));
                 }
             }
         }
@@ -154,21 +200,71 @@ namespace NirvanaEditor.Hub
                     plantilla.RutaProyectoArchivo = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(arc), plantilla.ProyectoArchivo));
 
                     this._plantillas.Add(plantilla);
-
-                    /*var plantilla = new PlantillaProyecto()
-                    {
-                        ProyectoTipo = "Proyecto Vacio",
-                        ProyectoArchivo = "proyecto.nirvana",
-                        Carpetas = new List<string> { ".Nirvana", "Contenido", "Codigo" }
-                    };
-                    Serializador.Serializar(plantilla, arc);*/
                 }
+                this.ValidarRutasProyecto();
             }
             catch (Exception ex) 
             {
                 Debug.WriteLine(ex.Message);
             }
         }
+        #endregion
+
+        #region Metodos Privados
+        /// <summary>
+        /// <para>Valida las rutas del proyecto.</para>
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidarRutasProyecto() 
+        {
+            string r = this.Ruta;
+            if (!this.TerminaConSeparador(r)) r += @"\";
+            r += $@"{this.Nombre}\";
+
+            this.EsValida = false;
+            if (string.IsNullOrWhiteSpace(this.Nombre.Trim()))
+            {
+                this.MsjError = "Escriba un nombre de proyecto.";
+            }
+            else if (this.Nombre.IndexOfAny(Path.GetInvalidFileNameChars()) != -1) 
+            {
+                this.MsjError = "Caracter(es) invalidos en el nombre del proyecto.";
+            }
+            else if (string.IsNullOrWhiteSpace(this.Ruta.Trim()))
+            {
+                this.MsjError = "Selecciona un directorio valido para el proyecto.";
+            }
+            else if (this.Ruta.IndexOfAny(Path.GetInvalidPathChars()) != -1)
+            {
+                this.MsjError = "Caracter(es) invalidos en la ruta del proyecto.";
+            }
+            else if (Directory.Exists(r) && Directory.EnumerateFileSystemEntries(r).Any())
+            {
+                this.MsjError = "El directorio seleccionado ya existe y no esta vacio.";
+            }
+            else 
+            {
+                this.MsjError = string.Empty;
+                this.EsValida = true;
+            }
+
+            return this.EsValida;
+        }
+
+        /// <summary>
+        /// <para>Determina si la ruta termina con un caracter de separador
+        /// de directorios.</para>
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        private bool TerminaConSeparador(string r) => r.Length > 0 && this.DirectorioConSeparador(r[r.Length - 1]);
+
+        /// <summary>
+        /// <para>Comprueba los diferentes tipos de separadores.</para>
+        /// </summary>
+        /// <param name="c">Caracter.</param>
+        /// <returns></returns>
+        private bool DirectorioConSeparador(char c) => c == CARACTER_SEPARACION_DIR || c == CARACTER_SEPARACION_DIR_ALT;
         #endregion
     }
 }
