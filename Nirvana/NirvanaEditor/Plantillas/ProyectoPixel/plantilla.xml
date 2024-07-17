@@ -1,0 +1,10 @@
+<PlantillaProyecto xmlns="http://schemas.datacontract.org/2004/07/NirvanaEditor.Hub" 
+                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <Carpetas xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <a:string>.Nirvana</a:string>
+        <a:string>Contenido</a:string>
+        <a:string>Codigo</a:string>
+    </Carpetas>
+    <ProyectoArchivo>proyecto.nirvana</ProyectoArchivo>
+    <ProyectoTipo>P. Pixel Art</ProyectoTipo>
+</PlantillaProyecto>

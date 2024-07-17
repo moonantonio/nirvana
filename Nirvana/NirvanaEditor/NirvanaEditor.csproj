@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utilidades\Serializador.cs" />
     <Page Include="Hub\HubProyectos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -76,9 +78,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Comun\VistaBase.cs" />
     <Compile Include="Hub\HubProyectos.xaml.cs">
       <DependentUpon>HubProyectos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Hub\CrearProyecto.cs" />
     <Compile Include="Hub\VistaAbrirProyecto.xaml.cs">
       <DependentUpon>VistaAbrirProyecto.xaml</DependentUpon>
     </Compile>
@@ -116,6 +120,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Plantillas\ProyectoAnime\Icono.png" />
+    <Resource Include="Plantillas\ProyectoAnime\Imagen.png" />
+    <Resource Include="Plantillas\ProyectoAnime\plantilla.xml" />
+    <Resource Include="Plantillas\ProyectoPixel\Icono.png" />
+    <Resource Include="Plantillas\ProyectoPixel\Imagen.png" />
+    <Resource Include="Plantillas\ProyectoPixel\plantilla.xml" />
+    <Resource Include="Plantillas\ProyectoTerceraPersona\Icono.png" />
+    <Resource Include="Plantillas\ProyectoTerceraPersona\Imagen.png" />
+    <Resource Include="Plantillas\ProyectoTerceraPersona\plantilla.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plantillas\Proyecto0\Icono.png" />
+    <Resource Include="Plantillas\Proyecto0\Imagen.png" />
+    <Resource Include="Plantillas\Proyecto0\plantilla.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

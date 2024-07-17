@@ -14,7 +14,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
             Margin="0,30,0,0">
             <Button Content="Abrir" Width="96" IsDefault="True"/>
-            <Button Content="Volver" Width="96" Margin="30,0,0,0" IsCancel="True"/>
+            <Button Content="Salir" Width="96" Margin="30,0,0,0" IsCancel="True"/>
         </StackPanel>
     </StackPanel>
 </UserControl>
