@@ -1,5 +1,6 @@
 ﻿#region Librerias
 using System.ComponentModel;
+using System.Runtime.Serialization;
 #endregion
 
 namespace NirvanaEditor
@@ -8,6 +9,7 @@ namespace NirvanaEditor
     /// <para>Clase base de la vista. Controla los cambios de valores en las 
     /// propiedades locales y las notifica.</para>
     /// </summary>
+    [DataContract(IsReference = true)]
     public class VistaBase : INotifyPropertyChanged
     {
         #region Eventos

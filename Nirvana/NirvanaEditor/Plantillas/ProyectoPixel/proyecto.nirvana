@@ -1,0 +1,12 @@
+<Juego z:Id="i1" xmlns="http://schemas.datacontract.org/2004/07/NirvanaEditor.Hub" 
+    xmlns:i="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/">
+    <Escenas>
+        <Escena z:Id="i2">
+            <Nombre>Escena Principal</Nombre>
+            <Proyecto z:Ref="i1"/>
+        </Escena>
+    </Escenas>
+    <Nombre>{0}</Nombre>
+    <Ruta>{1}</Ruta>
+</Juego>

@@ -57,6 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Hub\Escena.cs" />
+    <Compile Include="Hub\Proyecto.cs" />
     <Compile Include="Utilidades\Serializador.cs" />
     <Page Include="Hub\HubProyectos.xaml">
       <SubType>Designer</SubType>

@@ -24,5 +24,19 @@ namespace NirvanaEditor.Hub
         {
             InitializeComponent();
         }
+
+        private void UIBotonCrearProyecto(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as CrearProyecto;
+            var ruta = vm.CrearNuevoProyecto(cajaPlantillas.SelectedItem as PlantillaProyecto);
+            bool resultado = false;
+            var win = Window.GetWindow(this);
+            if (!string.IsNullOrEmpty(ruta))
+            {
+                resultado = true;
+            }
+            win.DialogResult = resultado;
+            win.Close();
+        }
     }
 }

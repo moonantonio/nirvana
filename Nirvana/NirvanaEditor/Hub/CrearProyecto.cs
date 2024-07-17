@@ -81,15 +81,15 @@ namespace NirvanaEditor.Hub
         private const char CARACTER_SEPARACION_DIR_ALT = '/';
         #endregion
 
-        #region Variables Publicas
+        #region Variables Privadas
         /// <summary>
         /// <para>Nombre del nuevo proyecto.</para>
         /// </summary>
-        public string _nombre = "NuevoProyecto";
+        private string _nombre = "NuevoProyecto";
         /// <summary>
         /// <para>Ruta del nuevo proyecto.</para>
         /// </summary>
-        public string _ruta = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\Nirvana\";
+        private string _ruta = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\ProyectosNirvana\";
         /// <summary>
         /// <para>Determina si es valida la ruta.</para>
         /// </summary>
@@ -206,6 +206,50 @@ namespace NirvanaEditor.Hub
             catch (Exception ex) 
             {
                 Debug.WriteLine(ex.Message);
+            }
+        }
+        #endregion
+
+        #region API
+        /// <summary>
+        /// <para>Crea un nuevo proyecto.</para>
+        /// </summary>
+        /// <param name="plantilla">Plantilla del proyecto.</param>
+        /// <returns></returns>
+        public string CrearNuevoProyecto(PlantillaProyecto plantilla)
+        {
+            this.ValidarRutasProyecto();
+            if (!this.EsValida)
+            {
+                return string.Empty;
+            }
+
+            if (!this.TerminaConSeparador(this.Ruta)) this.Ruta += @"\";
+            var r = $@"{this.Ruta}{this.Nombre}\";
+
+            try
+            {
+                if (!Directory.Exists(r)) Directory.CreateDirectory(r);
+                foreach (var carp in plantilla.Carpetas)
+                {
+                    Directory.CreateDirectory(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(r), carp)));
+                }
+                var infoDir = new DirectoryInfo(r + @".Nirvana\");
+                infoDir.Attributes |= FileAttributes.Hidden;
+                File.Copy(plantilla.RutaIcono, Path.GetFullPath(Path.Combine(infoDir.FullName, "Icono.png")));
+                File.Copy(plantilla.RutaIcono, Path.GetFullPath(Path.Combine(infoDir.FullName, "Imagen.png")));
+
+                var proyectoXml = File.ReadAllText(plantilla.RutaProyectoArchivo);
+                proyectoXml = string.Format(proyectoXml, this.Nombre, this.Ruta);
+                var proyectoRuta = Path.GetFullPath(Path.Combine(r, $"{this.Nombre}{Proyecto.Extension}"));
+                File.WriteAllText(proyectoRuta, proyectoXml);
+
+                return r;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return string.Empty;
             }
         }
         #endregion
